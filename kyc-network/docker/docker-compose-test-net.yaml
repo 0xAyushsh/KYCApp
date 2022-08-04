@@ -157,7 +157,7 @@ services:
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:13052
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.citibank.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.citibank.example.com:11051
-      - CORE_PEER_LOCALMSPID=CitiBankMSP
+      - CORE_PEER_LOCALMSPID=CITIBankMSP
     volumes:
         - /var/run/docker.sock:/host/var/run/docker.sock
         - ../organizations/peerOrganizations/citibank.example.com/peers/peer0.citibank.example.com/msp:/etc/hyperledger/fabric/msp
