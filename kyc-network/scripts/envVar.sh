@@ -76,22 +76,64 @@ setGlobalsCLI() {
 # parsePeerConnectionParameters $@
 # Helper function that sets the peer connection parameters for a chaincode
 # operation
+# parsePeerConnectionParameters() {
+#   PEER_CONN_PARMS=()
+#   PEERS=""
+#   while [ "$#" -gt 0 ]; do
+#     setGlobals $1
+#     PEER="peer0.org$1"
+#     ## Set peer addresses
+#     if [ -z "$PEERS" ]
+#     then
+# 	PEERS="$PEER"
+#     else
+# 	PEERS="$PEERS $PEER"
+#     fi
+#     PEER_CONN_PARMS=("${PEER_CONN_PARMS[@]}" --peerAddresses $CORE_PEER_ADDRESS)
+#     ## Set path to TLS certificate
+#     CA=PEER0_ORG$1_CA
+#     TLSINFO=(--tlsRootCertFiles "${!CA}")
+#     PEER_CONN_PARMS=("${PEER_CONN_PARMS[@]}" "${TLSINFO[@]}")
+#     # shift by one to get to the next organization
+#     shift
+#   done
+# }
+
 parsePeerConnectionParameters() {
   PEER_CONN_PARMS=()
   PEERS=""
   while [ "$#" -gt 0 ]; do
     setGlobals $1
-    PEER="peer0.org$1"
+    local USING_ORG=""
+    if [ -z "$OVERRIDE_ORG" ]; then
+      USING_ORG=$1
+    else
+      USING_ORG="${OVERRIDE_ORG}"
+    fi
+    
+    if [ $USING_ORG -eq 1 ]; then
+      PEER="peer0.sbibank"
+      CA=PEER0_SBIBank_CA
+    elif [ $USING_ORG -eq 2 ]; then
+      PEER="peer0.icicibank"
+      CA=PEER0_ICICIBank_CA
+    elif [ $USING_ORG -eq 3 ]; then
+      PEER="peer0.citibank"
+      CA=PEER0_CITIBank_CA
+    else
+      errorln "ORG Unknown"
+    fi 
+    # PEER="peer0.org$1"
     ## Set peer addresses
     if [ -z "$PEERS" ]
     then
-	PEERS="$PEER"
+	    PEERS="$PEER"
     else
-	PEERS="$PEERS $PEER"
+	    PEERS="$PEERS $PEER"
     fi
     PEER_CONN_PARMS=("${PEER_CONN_PARMS[@]}" --peerAddresses $CORE_PEER_ADDRESS)
     ## Set path to TLS certificate
-    CA=PEER0_ORG$1_CA
+    # CA=PEER0_ORG$1_CA
     TLSINFO=(--tlsRootCertFiles "${!CA}")
     PEER_CONN_PARMS=("${PEER_CONN_PARMS[@]}" "${TLSINFO[@]}")
     # shift by one to get to the next organization
