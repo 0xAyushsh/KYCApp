@@ -7,7 +7,7 @@ function createSBIBank() {
   export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/sbibank.example.com/
 
   set -x
-  fabric-ca-client enroll -u https://admin:adminpw@localhost:7054 --caname ca-sbibank --tls.certfiles "${PWD}/organizations/fabric-ca/sbibank/tls-cert.pem"
+  fabric-ca-client enroll -u https://sbiadmin:adminpw@localhost:7054 --caname ca-sbibank --tls.certfiles "${PWD}/organizations/fabric-ca/sbibank/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   echo 'NodeOUs:
@@ -87,7 +87,7 @@ function createICICIBank() {
   export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/icicibank.example.com/
 
   set -x
-  fabric-ca-client enroll -u https://admin:adminpw@localhost:8054 --caname ca-icicibank --tls.certfiles "${PWD}/organizations/fabric-ca/icicibank/tls-cert.pem"
+  fabric-ca-client enroll -u https://iciciadmin:adminpw@localhost:8054 --caname ca-icicibank --tls.certfiles "${PWD}/organizations/fabric-ca/icicibank/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   echo 'NodeOUs:
@@ -167,7 +167,7 @@ function createCITIBank() {
   export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/citibank.example.com/
 
   set -x
-  fabric-ca-client enroll -u https://admin:adminpw@localhost:11054 --caname ca-citibank --tls.certfiles "${PWD}/organizations/fabric-ca/citibank/tls-cert.pem"
+  fabric-ca-client enroll -u https://citiadmin:adminpw@localhost:11054 --caname ca-citibank --tls.certfiles "${PWD}/organizations/fabric-ca/citibank/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   echo 'NodeOUs:
